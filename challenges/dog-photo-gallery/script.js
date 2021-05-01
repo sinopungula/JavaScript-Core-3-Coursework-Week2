@@ -2,12 +2,8 @@
 
 let button = document.querySelector('#button1');
 //console.log(button)
-
-
 //add event listener
 button.addEventListener('click', getFetchAPI);
-
-
 // create a fetch to the API
 
 function getFetchAPI() {
@@ -15,7 +11,7 @@ function getFetchAPI() {
     const listItem = document.createElement('li');
     const img = document.createElement('img')
     
-    fetch('https://dog.ceo/api/breeds/image/random')
+    fetch('https://dog.ceo/api/breeds/image/random') //returns a 404???????????????
     .then(response => response.text())
     .then(data => {
         console.log(data)
