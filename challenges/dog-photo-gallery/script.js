@@ -1,52 +1,41 @@
-//pull all items from DOM 
+//Write a function that makes an API call to `https://dog.ceo/api/breeds/image/random`.
+const div = document.getElementById('imageSection');
+const list = document.getElementById('list')
+const listItem = document.createElement('li')
+listItem.style.listStyleType = 'none';
+const image = document.createElement('img');
 
-let button = document.querySelector('#button1');
-let button2 = document.querySelector('#button2');
-console.log(button)
-console.log(button2)
-//add event listener
-function changeColour() {
-    console.log('???')
-    const list = document.getElementById('list');
-    const listItem = document.createElement('li');
-    const img = document.createElement('img')
-    console.log("list",list)
+function makeAPICall () {
+    fetch('https://dog.ceo/api/breeds/image/random')
+    .then(function (response) {
+        return response.json()})
+    .then(function (data) {
+    //console.log(data);
+    image.src = `${data.message}`;
+    listItem.appendChild(image);
+    list.appendChild(listItem);
     
-    fetch('https://dog.ceo/api/breeds/image/random') //returns a 404???????????????
-    .then(function (response){
-        return response.json();
-    }) 
-    .then(function (data){
-        console.log(data)
-        // img.src = `${data}`;
-        // listItem.appendChild(img);
-        // list.appendChild(listItem);
-});
-changeColour();
+}).catch(console.log('some error occured in the fetch'))
+}
+div.appendChild(list);
 
-button.addEventListener('click', () => {
-    console.log('she works')
-//     const list = document.getElementById('list');
-//     const listItem = document.createElement('li');
-//     const img = document.createElement('img')
-//     console.log("list",list)
-    
-//     fetch('https://dog.ceo/api/breeds/image/random') //returns a 404???????????????
-//     .then(function (response){
-//         return response.json();
-//     }) 
-//     .then(function (data){
-//         console.log(data)
-//         // img.src = `${data}`;
-//         // listItem.appendChild(img);
-//         // list.appendChild(listItem);
-});
-// create a fetch to the API
-//console.log("button", button)
+// makeAPICall();
 
+//It should trigger after clicking a button in your webpage.
 
-// function getFetchAPI() {
-//     
+const button = document.getElementById('button1');
+console.log('button?', button)
+button.style.backgroundColor = 'salmon';
+button.addEventListener('click', makeAPICall);
 
-//     })
-//     .catch(console.error());
+const clearButton = document.getElementById('button2');
+clearButton.style.backgroundColor = 'gray';
+clearButton.addEventListener('click', () => {
+   div.removeChild(list)
+   const para = document.createElement('p');
+   para.innerText = `That's enough doggies for today :)`
+   div.appendChild(para);
+})
+
+//Every time the button is clicked it should append a new dog image to the DOM.
+
