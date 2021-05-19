@@ -1,24 +1,20 @@
 //fetch api
-window.onload
+ window.onload
 let div = document.querySelector('#div');
-
-console.log('whats going on??')
-fetch('https://xkcd.now.sh/?comic=latest', {
-  headers: { "Content-Type": "application/json; charset=utf-8" },
-  method: 'GET',
-})
+// let p = document.querySelector('#para');
+// console.log('para', p)
+// console.log('whats going on??')
+fetch('https://xkcd.now.sh/?comic=latest')
 .then(function (response) {
     return response.json();
 })
 .then(function (data) {
-    console.log('data? here:', data)
-    // let para = document.createElement('p');
-    // console.log('para', para)
-    // para.innerHTML = `${data}`;
-    // div.appendChild(para);
-    // console.log('divvy', div)
-    let image = document.createElement('img')
-    image.src = `${data}`;
+    //console.log('data? here:', data)
+    let image = document.createElement('img') 
+    //console.log('works up till here?')
+    //image.src = "https://imgs.xkcd.com/comics/mullers_ratchet.png";
+    image.src = `${data.img}`;
+    div.appendChild(image);
 })
 .catch(error => console.log('an error occured', error))
 
